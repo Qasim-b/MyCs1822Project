@@ -7,14 +7,15 @@ def choice_Delete():
         with open('expenses.csv', 'r+') as file_del:
             fieldnames = ["Description","Category","Amount"]
             reader = csv.DictReader(file_del, fieldnames)
-            filtered_output = [line for line in reader if line['Description'] != entrydelete]
-            file_del.seek(0)
+            filtered_output = [line for line in reader if line['Description'] != entrydelete] #checks the ines for all entries barring the one to be deleted
+            file_del.seek(0) #goto top of file
             writer = csv.DictWriter(file_del, fieldnames)
-            writer.writerows(filtered_output)
-            file_del.truncate()
+            writer.writerows(filtered_output) #inputs all entries back into the file barring the ones to be removed
+            file_del.truncate() #removes whitespace
             print("Entry successfully deleted")
             delchoice = int(input("Would you like to delete another entry? 1.yes / 2.no"))
             if delchoice == 2:
+                file_del.close()
                 loop = False
                 editMode()
 
@@ -22,7 +23,7 @@ def editMode():
     if os.path.isfile("expenses.csv"):
         filechoice = int(input("1.add data / 2.delete data / 3.Return to menu "))
         if filechoice == 1:
-            with open('expenses.csv', 'a', newline='') as file: #probs need to check if exists aswell.
+            with open('expenses.csv', 'a', newline='') as file: #RUNS IF FILE EXITS.
                 fieldnames = ["Description","Category","Amount"]
                 writer = csv.DictWriter(file, fieldnames=fieldnames)
                 loop = True
@@ -33,20 +34,18 @@ def editMode():
                     writer.writerow({"Description" : Description,"Category": Category,"Amount":Amount})
                     usexit = input("add another entry? y/n")
                     if usexit == "n":
+                        file.close()
                         loop = False
                         menu()
         elif filechoice == 2:
             choice_Delete()
         elif filechoice == 3:
             menu()
-            #program will search file for the line, will open 2 files. 2nd one called expenses_edit
-            #program will then add everything barring the line thats chosen, then will delete expenses
-            #will then rename expenses_edit into expenses.
-    else:
-        with open('expenses.csv', 'w', newline='') as file: #probs need to check if exists aswell.
+    else: #CREATE FILE IF IT DOESNT ALREADY EXIST
+        with open('expenses.csv', 'w', newline='') as file:
             fieldnames = ["Description","Category","Amount"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
-            writer.writeheader()
+            writer.writeheader() #create top row containing fieldnames
             loop = True
             while (loop):
                 Description = input("Enter a description")
@@ -55,6 +54,7 @@ def editMode():
                 writer.writerow({"Description":Description,"Category": Category,"Amount":Amount})
                 usexit = input("add another entry? y/n")
                 if usexit == "n":
+                    file.close()
                     loop = False
                     menu()
 
