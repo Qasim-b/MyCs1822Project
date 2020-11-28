@@ -12,7 +12,6 @@ def editMode():
                     Description = input("Enter a description")
                     Category = input("Enter a category")
                     Amount = int(input("Enter an amount"))
-                    writer.writeheader()
                     writer.writerow({"Description" : Description,"Category": Category,"Amount":Amount})
                     usexit = input("add another entry? y/n")
                     if usexit == "n":
@@ -25,12 +24,12 @@ def editMode():
         with open('expenses.csv', 'w', newline='') as file: #probs need to check if exists aswell.
             fieldnames = ["Description","Category","Amount"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
             loop = True
             while (loop):
                 Description = input("Enter a description")
                 Category = input("Enter a category")
                 Amount = int(input("Enter an amount"))
-                writer.writeheader()
                 writer.writerow({"Description":Description,"Category": Category,"Amount":Amount})
                 usexit = input("add another entry? y/n")
                 if usexit == "n":
