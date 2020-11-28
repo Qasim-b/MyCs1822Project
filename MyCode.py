@@ -1,20 +1,34 @@
 import csv
+import os.path
 def editMode():
-    with open('expenses.csv', 'w', newline='') as file: #probs need to check if exists aswell.
-        writer = csv.writer(file)
-        loop = True
-        ID = 0
-        while (loop):
-            Description = input("Enter a description")
-            Category = input("Enter a category")
-            Amount = int(input("Enter an amount"))
-            writer.writerow(["ID","Description", "Category", "Amount"])
-            writer.writerow([ID, Description, Category, Amount])
-            ID = ID + 1
-            usexit = input("add another entry? y/n")
-            if usexit == "n":
-                loop = False
-                menu()
+    if os.path.isfile("expenses.csv"):
+        with open('expenses.csv', 'a', newline='') as file: #probs need to check if exists aswell.
+            writer = csv.writer(file)
+            loop = True
+            while (loop):
+                Description = input("Enter a description")
+                Category = input("Enter a category")
+                Amount = int(input("Enter an amount"))
+                writer.writerow(["Description", "Category", "Amount"])
+                writer.writerow([Description, Category, Amount])
+                usexit = input("add another entry? y/n")
+                if usexit == "n":
+                    loop = False
+                    menu()
+    else:
+        with open('expenses.csv', 'w', newline='') as file: #probs need to check if exists aswell.
+            writer = csv.writer(file)
+            loop = True
+            while (loop):
+                Description = input("Enter a description")
+                Category = input("Enter a category")
+                Amount = int(input("Enter an amount"))
+                writer.writerow(["Description", "Category", "Amount"])
+                writer.writerow([Description, Category, Amount])
+                usexit = input("add another entry? y/n")
+                if usexit == "n":
+                    loop = False
+                    menu()
 
 def totalExpenditure(listOfExpenditure):
 	total = 0
@@ -73,7 +87,7 @@ def menu():
     choice = int(input("Choose either option '1' or '2' "))
     if choice == 1:
         editMode()
-    elif choice = 2:
+    elif choice == 2:
         performAnalysis()
 
 if __name__ == "__main__":
