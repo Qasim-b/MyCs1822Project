@@ -19,7 +19,9 @@ def editMode():
                         menu()
         elif filechoice ==2:
             deletechoice = input("enter the decription of the item you would like to delete")
-
+            #program will search file for the line, will open 2 files. 2nd one called expenses_edit
+            #program will then add everything barring the line thats chosen, then will delete expenses
+            #will then rename expenses_edit into expenses.
     else:
         with open('expenses.csv', 'w', newline='') as file: #probs need to check if exists aswell.
             fieldnames = ["Description","Category","Amount"]
