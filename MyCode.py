@@ -2,29 +2,36 @@ import csv
 import os.path
 def editMode():
     if os.path.isfile("expenses.csv"):
-        with open('expenses.csv', 'a', newline='') as file: #probs need to check if exists aswell.
-            writer = csv.writer(file)
-            loop = True
-            while (loop):
-                Description = input("Enter a description")
-                Category = input("Enter a category")
-                Amount = int(input("Enter an amount"))
-                writer.writerow(["Description", "Category", "Amount"])
-                writer.writerow([Description, Category, Amount])
-                usexit = input("add another entry? y/n")
-                if usexit == "n":
-                    loop = False
-                    menu()
+        filechoice = int(input("1.add data / 2.delete data "))
+        if filechoice == 1:
+            with open('expenses.csv', 'a', newline='') as file: #probs need to check if exists aswell.
+                fieldnames = ["Description","Category","Amount"]
+                writer = csv.DictWriter(file, fieldnames=fieldnames)
+                loop = True
+                while (loop):
+                    Description = input("Enter a description")
+                    Category = input("Enter a category")
+                    Amount = int(input("Enter an amount"))
+                    writer.writeheader()
+                    writer.writerow({"Description" : Description,"Category": Category,"Amount":Amount})
+                    usexit = input("add another entry? y/n")
+                    if usexit == "n":
+                        loop = False
+                        menu()
+        elif filechoice ==2:
+            deletechoice = input("enter the decription of the item you would like to delete")
+
     else:
         with open('expenses.csv', 'w', newline='') as file: #probs need to check if exists aswell.
-            writer = csv.writer(file)
+            fieldnames = ["Description","Category","Amount"]
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
             loop = True
             while (loop):
                 Description = input("Enter a description")
                 Category = input("Enter a category")
                 Amount = int(input("Enter an amount"))
-                writer.writerow(["Description", "Category", "Amount"])
-                writer.writerow([Description, Category, Amount])
+                writer.writeheader()
+                writer.writerow({"Description":Description,"Category": Category,"Amount":Amount})
                 usexit = input("add another entry? y/n")
                 if usexit == "n":
                     loop = False
