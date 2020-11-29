@@ -1,5 +1,5 @@
 # MyCs1822Project
-Created by Tyler Trembeth & Qasim Baig
+Created by Tyler Trembath & Qasim Baig
 
 The file is split up into 3 main functions, edit(+delete)-analysis-menu.
 
