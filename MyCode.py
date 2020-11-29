@@ -58,27 +58,6 @@ def editMode():
                     loop = False
                     menu()
 
-def totalExpenditure(listOfExpenditure):
-	total = 0
-
-	for n in listOfExpenditure:
-		total += n
-
-
-	return total
-
-def avgExpenditure(listOfExpenditure):
-
-    total = 0
-    nItems = 0
-
-    for n in listOfExpenditure:
-    	total += n
-    	nItems += 1
-
-
-    return total / nItems
-
 
 def performAnalysis():
 
