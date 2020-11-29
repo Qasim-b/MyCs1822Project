@@ -19,5 +19,4 @@ The user is prompted to enter the description of the item they want to delete.
 The program then stores all the rows of the csv file, barring the one the user wants to delete to a variable.
 Then all the rows stored in the variable are written back into the file. leaving out the one the user wants to get rid off. Thus being deleted.
 
-
-The analysis function ------
+The analysis function was used to perform calculations on the data within the expenses csv's data. This was achieved by creating a function which initialises variables to zero and adds to them as each item is iterated over. The third variable initialised is a dictionary which is used to store each catagories total expenditure and is printed out as per the analysis requirements. 
